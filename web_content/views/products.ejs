@@ -6,7 +6,7 @@
     <title>Sharp Objects</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="images/Sharp.png">
-    <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
     <script src="/main.js" defer></script>
 </head>
 <body>
@@ -26,7 +26,7 @@
         <h1>Products</h1>
     </div>
         <main id="product_wrapper">
-            <div class="filter_bar">
+            <div id="filter_bar">
                 <div id="search_bar">   
                     <input id="search" type="text" placeholder="Search">
                 </div> 
@@ -44,7 +44,17 @@
                 </div>
             </div>
             <div class="products">
-                <section class="product toys">
+                <% products.forEach(product =>{ %>
+                <section class="product">
+                    <img src="images/NO_Image.png" alt= "<%= product.name %>">
+                    <a href="#"><h3><%= product.name %></h3></a>
+                    <div class="product_info">
+                        <h4><%= product.stock %></h4>
+                        <h4>$<%= product.cost %></h4>
+                    </div>
+                </section>
+                <% }) %>
+                <!-- <section class="product toys">
                     <img src="images/infinity_cube.png" alt="product image1">
                     <a href="#"> <h3>Infinity Cube</h3></a>
                     <div class="product_info">
@@ -187,7 +197,7 @@
                         <h4>In stock</h4>
                         <h4>3.99</h4>
                     </div>
-                </section>
+                </section> -->
             </div>
 
             <img id="custom_order_img" src="images/product_custom_banner.png" alt="custom image background">
@@ -196,6 +206,9 @@
                 <p>If you want you own design printed, just order it here.</p>
                 <a href="#">Order Now</a>
             </div>
+        
+        <button id="search_tab_button">🔍</button>
+
         </main>
             <footer>
                 <p> Sharp Objects &copy; 2023 - Nathan Sharp</p>

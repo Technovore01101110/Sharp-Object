@@ -1,31 +1,14 @@
-// // Api example
-// const http = require("node:http");
-
-// const server = http.createServer((req, res) => {
-//     // console.log(req)
-
-//     const superHero = {
-//         firstName: "Bruce",
-//         lastName: "Wayne"
-//     }
-
-//     res.writeHead(200, {"Content-type" : "application/json"});
-//     res.end(JSON.stringify(superHero));
-// });
-
-// server.listen(3001, () => {
-//     console.log("Server running on port 3000");
-// })
-
-
 // These get the libraries needed to run and display the server.
 const http = require("node:http");
 const fs = require("node:fs");
 const fsPromises = require("fs").promises
 const path = require("path");
+const get_table = require("./database.mjs").get_table
 
+// Sets up a port
 const PORT = process.env.PORT || 3500;
 
+// This function writes up the response for the request.
 const serveFile = async (filePath, contentType, response) => {
     try {
         const encoding = contentType.startsWith('image') ? null : 'utf8';
@@ -39,10 +22,25 @@ const serveFile = async (filePath, contentType, response) => {
     }
 }
 
-// // This will create a server and send any information back to any request.
-const server = http.createServer((req, res) => {
+// const serveApi = async (data, )
+
+// This will create a server and send any information back to any request.
+const server = http.createServer(async (req, res) => {
+    
+    // This displays in the console the url requested and the request type.
     console.log(`Url: ${req.url} | Request Type: ${req.method}`)
     
+    // This handles api requests
+    if (req.url.startsWith('/api/')){
+        return handleApiRequest(req, res);
+    } else if(req.url == '/data/products'){
+        const data = await get_table("product")
+        res.writeHead(200, {'Content-Type' : "application/json"});
+        return res.end(JSON.stringify(data));
+    }
+
+
+    // This will grab the 
     const extension = path.extname(req.url)
 
     let contentType = '';
@@ -69,6 +67,15 @@ const server = http.createServer((req, res) => {
         default:
             contentType = 'text/html';
             break;
+    }
+
+    if (req.url.startsWith("/product/")){
+        if (req.url === "/product/"){
+            serveFile(path.join(__dirname, "views", "404.html"), 'text/html',
+                                res)
+        } else {
+            
+        }
     }
 
     let filePath = 

@@ -60,7 +60,7 @@ header {
 }
 
 #nav-wrapper{
-    background-color: #edae49;
+    position: relative;
 }
 
 #nav-wrapper.sticky{
@@ -78,6 +78,7 @@ header {
     background-color: #edae49;
     border: none;
     box-shadow: 0 6px 5px #3d3b35;
+    z-index: 10;
 }
 
 #menu_button img{
@@ -99,17 +100,22 @@ nav a:hover {
 }
 
 #navbar {
+    background-color: #edae49;
     border: none;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition:  0.3s ease;
     display: flex;
     justify-content: space-around;
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+    border-bottom: 3px solid #edae49;
 }
 
 #navbar.open {
-    border: 3px solid #706C61;
     max-height: 500px;
+    border-bottom: 3px solid #706C61;
 }
 
 #hero {
@@ -186,7 +192,7 @@ nav a:hover {
     color: #3FA7D6;
     background-color: #46433c;
 }
-.hproducts{
+#hproducts{
     box-shadow: 0px 0px 8px 0px black;
     margin-top: -5px;
     margin-bottom: 200px;
@@ -319,11 +325,18 @@ footer p {
     grid-template-columns: 2fr 1fr 2fr;
     align-items: center;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    overflow: hidden;
 }
 #banner img{
+    height: 100%;
     width: 100%;
     grid-column: 1/4;
     grid-row: 1/4;
+    object-fit: cover;
+    z-index: -1;
 }
 
 #banner h1{
@@ -355,14 +368,37 @@ footer p {
     flex-direction: column;
 }
 
-.filter_bar{
-    grid-column: 1/2;
-    grid-row: 1/2;
+#filter_bar{
+    position: fixed;
+    width: 0px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 2;
     padding: 20px;
     background-color: #edae49;
     margin: 10px;
     height: min-content;
 }
+
+#filter_bar.open {
+    top: 25%;
+    width: 100%;
+    transition: 0.5s;
+}
+
+#search_tab_button{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    background-color: #3fa6d6d6;
+    border: #2d789aa8 3px solid;
+    border-radius: 50px;
+    font-size: 2em;
+}
+
 .checkboxes{
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -627,7 +663,7 @@ label{
         grid-column: 1/5;
     }
 
-    .hproducts{
+    #hproducts{
         display: flex;
         flex-direction: column;
         margin-bottom: 100px;

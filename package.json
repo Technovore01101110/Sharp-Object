@@ -1,0 +1,22 @@
+{
+  "name": "sharp-object",
+  "version": "1.0.0",
+  "description": "This is a full-stack 3D Printing Website using Front-End and Back-End. When I finish this project, it should be able to handle customers, orders, emails, custom orders, and admin managment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Technovore01101110/Sharp-Object.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Technovore01101110/Sharp-Object/issues"
+  },
+  "homepage": "https://github.com/Technovore01101110/Sharp-Object#readme"
+}
