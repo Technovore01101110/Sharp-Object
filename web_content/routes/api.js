@@ -1,8 +1,7 @@
 import express  from "express";
 import {fileURLToPath} from "url";
 import path from "path";
-import {get_featured_products} from "../database.mjs"
-import {get_products} from "../database.mjs"
+import {get_featured_products, get_products, get_product_count} from "../database.mjs"
 const router = express.Router();
 
 router.get("/products/featured", async (req, res) => {
@@ -25,6 +24,20 @@ router.get("/products", async (req, res) =>{
     }
     res.json(products)
 
+})
+
+router.get("/products/count", async (req, res) => {
+    const search = req.query.k
+    let countRes;
+
+    if (search)
+        countRes = await get_product_count(search);
+    else {
+        countRes = await get_product_count();
+    }
+    console.log(countRes)
+    const count = countRes[0];
+    res.status(202).json(count);
 })
 
 export default router;

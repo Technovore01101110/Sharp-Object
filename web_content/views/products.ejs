@@ -199,7 +199,15 @@
                     </div>
                 </section> -->
             </div>
+            <div id="page-nav">
+                <% if (page > 1) { %>
+                    <a href="/products?page=<%= page - 1 %>"><-</a>
+                <% } %>
 
+                <% if (page < totalPages) { %>
+                    <a href="/products?page=<%= page + 1 %>">-></a>
+                <% } %>
+            </div>
             <img id="custom_order_img" src="images/product_custom_banner.png" alt="custom image background">
             <div id="custom_msg">
                 <h2>Order Custom Prints</h2>

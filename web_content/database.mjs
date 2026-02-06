@@ -55,4 +55,17 @@ export async function get_products(offset, limit, key = null){
     return data[0];
 }
 
+export async function get_product_count(search = null){
+    let data;
+    
+    if(search == null){
+        data = await pool.query(`SELECT COUNT(*) AS count FROM product`)
+    } else {
+        data = await pool.query(`SELECT COUNT(*) AS count FROM product WHERE name = ${search}`)
+    }
+
+    return data[0]
+
+}
+
 // console.log(`Customer name: ${customer_data[first_name]} ${customer_data[last_name]}`)
