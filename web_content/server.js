@@ -17,8 +17,15 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use('/api', api_router)
 
-app.get("/", (req, res) =>{
-    res.status(202).sendFile(path.join(__dirname, "views", "index.html"));
+app.get("/", async (req, res) =>{
+    const response = await fetch("http://127.0.0.1:3500/api/products/featured")
+    const products = await response.json()
+
+    products.forEach(product => {
+        product.cost = Number(product.cost).toFixed(2);
+    });
+
+    res.status(202).render(path.join(__dirname, "views", "index.ejs"), {products});
 })
 
 app.get("/contact", (req, res) =>{

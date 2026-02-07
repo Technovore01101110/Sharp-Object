@@ -27,7 +27,7 @@ export async function get_table(table) {
 }
 
 export async function get_featured_products(limit){
-    const product_data = await pool.query(`SELECT name, cost,CASE WHEN amount = 0 THEN "Out"
+    const product_data = await pool.query(`SELECT name, ROUND(cost, 2) AS cost,CASE WHEN amount = 0 THEN "Out"
                                            WHEN amount <= 100 THEN CONCAT(amount, " left")
                                            ELSE "High" END AS stock 
                                            FROM product

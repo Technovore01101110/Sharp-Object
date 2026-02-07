@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/products/featured", async (req, res) => {
     const products = await get_featured_products(5);
-    console.log(products);
+    console.log(products);  
     res.status(202).json(products);
 })
 

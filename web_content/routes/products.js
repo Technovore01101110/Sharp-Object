@@ -50,7 +50,10 @@ router.get('/', async (req, res) =>{
     }
     
     const products = await product_data.json()
-
+    console.log(products)
+    products.forEach(product => {
+        product.cost = Number(product.cost).toFixed(2);
+    });
 
     // Return data, page number, and total pages.
     res.status(202).render(path.join(__dirname, "..", "views", "products.ejs"), { products, page, totalPages })

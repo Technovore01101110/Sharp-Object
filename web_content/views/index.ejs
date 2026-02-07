@@ -8,7 +8,6 @@
         <link rel="apple-touch-icon" href="images" href="images/Sharp.png">
         <link rel="stylesheet" href="/css/stylesheet.css">
         <script src="/main.js" defer></script>
-        <script src="/home.js" defer></script>
     </head>
     <body>
         <header>
@@ -30,53 +29,23 @@
                 <h1>Print Now</h1>
                 <h2>Order some of our 3D printed designs.</h2>
                 <div class="button_box">
-                    <a class="buy" href="products.html" >Buy</a>
+                    <a class="buy" href="products" >Buy</a>
                 </div>
             </div>
         </div>
             <main id="home-grid">
                 <div id="hproducts">
-                    <!-- <section class="product">
-                        <img src="images/infinity_cube.png" alt="infinity_cube_image">
-                        <a href="#"><h3>Infinity Cube</h3></a>
-                        <h4>$4.99</h4>
-                    </section>
-                    <section class="product">
-                        <img src="images/NO_Image.png" alt="blank_image">
-                        <a href="#"><h3>Product 2</h3></a>
-                        <h4>$4.99</h4>
-                    </section>
-                    <section class="product">
-                        <img src="images/NO_Image.png" alt="blank_image">
-                        <a href="#"><h3>Product 3</h3></a>
-                        <h4>$4.99</h4>
-                    </section>
-                    <section class="product">
-                        <img src="images/NO_Image.png" alt="blank_image">
-                        <a href="#"><h3>Product 4</h3></a>
-                        <h4>$4.99</h4>
-                    </section>
-                    <section class="product">
-                        <img src="images/NO_Image.png" alt="blank_image">
-                        <a href="#"><h3>Product 5</h3></a>
-                        <h4>$4.99</h4>
-                    </section>
-                    <section class="product">
-                        <img src="images/NO_Image.png" alt="blank_image">
-                        <a href="#"><h3>Product 6</h3></a>
-                        <h4>$4.99</h4>
-                    </section>
-                    <section class="product">
-                        <img src="images/NO_Image.png" alt="blank_image">
-                        <a href="#"><h3>Product 7</h3></a>
-                        <h4>$4.99</h4>
-                    </section>
-                    <section class="product">
-                        <img src="images/NO_Image.png" alt="blank_image">
-                        <a href="#"><h3>Product 8</h3></a>
-                        <h4>$4.99</h4> -->
-                    </section>
-                    <a id="see_more" href="products.html">See more &#8677;</a>
+                    <% products.forEach(product =>{ %>
+                        <section class="product">
+                            <img src="images/NO_Image.png" alt= "<%= product.name %>">
+                            <a href="#"><h3><%= product.name %></h3></a>
+                            <div class="product_info">
+                                <h4><%= product.stock %></h4>
+                                <h4>$<%= product.cost %></h4>
+                            </div>
+                        </section>
+                    <% }) %>
+                    <a id="see_more" href="products">See more &#8677;</a>
                 </div>
                 <div id = 'custom_print_sect'>
                     <img id="image_background" src="images/custom_banner.png" alt="">
