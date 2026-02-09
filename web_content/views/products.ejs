@@ -6,7 +6,7 @@
     <title>Sharp Objects</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="images/Sharp.png">
-    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="/css/stylesheet.css">
     <script src="/main.js" defer></script>
 </head>
 <body>
@@ -26,28 +26,31 @@
         <h1>Products</h1>
     </div>
         <main id="product_wrapper">
-            <div id="filter_bar">
+            <form id="filter_bar" action="/products" method="GET">
                 <div id="search_bar">   
-                    <input id="search" type="text" placeholder="Search">
+                    <input id="search" type="text" name="k" placeholder="Search">
+                    <button>Search</button>
                 </div> 
-                <div class="checkboxes">
-                    <input type="checkbox">
+                <fieldset class="checkboxes">
+                    <legend>Categories</legend>
+
+                    <input type="checkbox" name="category" value="toy">
                     <h3>Toys</h3>
-                    <input type="checkbox">
+                    <input type="checkbox" name="category" value="decoration">
                     <h3>Decoration</h3>
-                    <input type="checkbox">
-                    <h3>Jewlery</h3>
-                    <input type="checkbox">
+                    <input type="checkbox" name="category" value="jewelry">
+                    <h3>Jewelry</h3>
+                    <input type="checkbox" name="category" value="cookie-cutter">
                     <h3>Cooke Cutters</h3>
-                    <input type="checkbox">
+                    <input type="checkbox" name="category" value="seasonal">
                     <h3>Seasonal</h3>
-                </div>
-            </div>
+                </fieldset>
+            </form>
             <div class="products">
                 <% products.forEach(product =>{ %>
                 <section class="product">
                     <img src="images/NO_Image.png" alt= "<%= product.name %>">
-                    <a href="#"><h3><%= product.name %></h3></a>
+                    <a href="/products/<%= product.name%>"><h3><%= product.name %></h3></a>
                     <div class="product_info">
                         <h4><%= product.stock %></h4>
                         <h4>$<%= product.cost %></h4>
@@ -94,24 +97,5 @@
                     </a>
                 </div>
             </footer>
-        <script>
-        document.addEventListener('DOMContentLoaded', function () {
-    const checkboxes = document.querySelectorAll('.checkboxes input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            const category = checkbox.nextElementSibling.textContent.trim().toLowerCase();
-            const products = document.querySelectorAll('.products .product');
-            products.forEach(function(product) {
-                const productTags = product.className.split(' '); // Get all classes
-                if (productTags.includes(category) || checkbox.checked === false) {
-                    product.style.display = 'block'; // Show product
-                } else {
-                    product.style.display = 'none'; // Hide product
-                }
-            });
-        });
-    });
-});
-        </script>
 </body>
 </html>

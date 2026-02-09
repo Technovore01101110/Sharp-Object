@@ -8,11 +8,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 router.get('/', async (req, res) =>{
+    console.log(req.query)
     const page = Number(req.query.page) || 1;
     const search = req.query.k;
     const limit = 10;
     let offset;
 
+    console.log(search)
 
     if (page == undefined){
         offset = 0;
@@ -57,6 +59,16 @@ router.get('/', async (req, res) =>{
 
     // Return data, page number, and total pages.
     res.status(202).render(path.join(__dirname, "..", "views", "products.ejs"), { products, page, totalPages })
+})
+
+router.get('/:name', async (req, res) =>{
+    const name = req.params.name
+
+    if (name == undefined){
+        res.status(400).send("Error")
+    } else{
+        res.status(202).render(path.join(__dirname, "..", "views", "product.ejs"), {name})
+    }
 })
 
 export default router;

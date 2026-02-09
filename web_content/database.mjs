@@ -43,7 +43,7 @@ export async function get_products(offset, limit, key = null){
                                    WHEN amount <= 100 THEN CONCAT(amount, " left")
                                    ELSE "High" END AS stock 
                                    FROM product
-                                   WHERE name = ${key}
+                                   WHERE name = '${key}'
                                    ORDER BY rating LIMIT ${limit} OFFSET ${offset}`)
     } else {
     data = await pool.query(`SELECT name, cost,CASE WHEN amount = 0 THEN "Out"
@@ -61,7 +61,7 @@ export async function get_product_count(search = null){
     if(search == null){
         data = await pool.query(`SELECT COUNT(*) AS count FROM product`)
     } else {
-        data = await pool.query(`SELECT COUNT(*) AS count FROM product WHERE name = ${search}`)
+        data = await pool.query(`SELECT COUNT(*) AS count FROM product WHERE name = '${search}'`)
     }
 
     return data[0]
