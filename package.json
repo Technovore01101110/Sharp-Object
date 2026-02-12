@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Technovore01101110/Sharp-Object/issues"
   },
-  "homepage": "https://github.com/Technovore01101110/Sharp-Object#readme"
+  "homepage": "https://github.com/Technovore01101110/Sharp-Object#readme",
+  "dependencies": {
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
 }

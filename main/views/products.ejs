@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharp Objects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="images/Sharp.png">
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <script src="/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <a href="index" class ="logo_link"><img src="images/Sharp.png" alt="logo link"></a>
+        <div id ="nav-wrapper">
+            <button id="menu_button"><img src="/images/symbols/bars.png" alt="-"></button>
+            <nav id = "navbar">
+                <a href="/">Home</a>
+                <a href="products">Products</a>
+                <a href="contact">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+    <div id="banner">
+        <img src="images/product_banner.png" alt="background image">
+        <h1>Products</h1>
+    </div>
+        <main id="product_wrapper">
+            <form id="filter_bar" action="/products" method="GET">
+                <div id="search_bar">   
+                    <input id="search" type="text" name="k" placeholder="Search" value="<%= k || '' %>">
+                    <button>Search</button>
+                </div> 
+                <fieldset class="checkboxes">
+                    <legend>Categories</legend>
+
+                    <input type="checkbox" name="category" value="toy">
+                    <h3>Toys</h3>
+                    <input type="checkbox" name="category" value="decoration">
+                    <h3>Decoration</h3>
+                    <input type="checkbox" name="category" value="jewelry">
+                    <h3>Jewelry</h3>
+                    <input type="checkbox" name="category" value="cookie-cutter">
+                    <h3>Cooke Cutters</h3>
+                    <input type="checkbox" name="category" value="seasonal">
+                    <h3>Seasonal</h3>
+                </fieldset>
+            </form>
+            <div class="products">
+                <% products.forEach(product =>{ %>
+                <section class="product">
+                    <img src="images/NO_Image.png" alt= "<%= product.name %>">
+                    <a href="/products/<%= product.name%>"><h3><%= product.name %></h3></a>
+                    <div class="product_info">
+                        <h4><%= product.stock %></h4>
+                        <h4>$<%= product.cost %></h4>
+                    </div>
+                </section>
+                <% }) %>
+            </div>
+            <div id="page-nav">
+                <% if (page > 1) { %>
+                    <a href="/products?page=<%= page - 1 %>"><-</a>
+                <% } %>
+
+                <% if (page < totalPages) { %>
+                    <a href="/products?page=<%= page + 1 %>">-></a>
+                <% } %>
+            </div>
+            <img id="custom_order_img" src="images/product_custom_banner.png" alt="custom image background">
+            <div id="custom_msg">
+                <h2>Order Custom Prints</h2>
+                <p>If you want you own design printed, just order it here.</p>
+                <a href="#">Order Now</a>
+            </div>
+        
+        <button id="search_tab_button">🔍</button>
+
+        </main>
+            <footer>
+                <p> Sharp Objects &copy; 2023 - Nathan Sharp</p>
+                <div class="footer-links">
+                <p><a href="https://technovore01101110.github.io/WDD130/sharp-objects/site-plan.html">Site Plan</a></p>
+                <p><a href="products.html">Products</a></p>
+                <p><a href="contact.html">Contact Us</a></p>
+                </div>
+
+                <div class="social">
+                    <a href="https://www.facebook.com/" target="_blank">
+                        <img src="images/facebook.png" alt="fb icon">
+                    </a>
+                    <a href="https://twitter.com/" target="_blank">
+                        <img src="images/twitter.png" alt="twitter icon">
+                    </a>
+                    <a href="https://instagram.com" target="_blank">
+                        <img src="images/instagram.png" alt="instagram icon">
+                    </a>
+                </div>
+            </footer>
+</body>
+</html>

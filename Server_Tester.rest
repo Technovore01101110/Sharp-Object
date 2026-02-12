@@ -1,0 +1,17 @@
+GET http://127.0.0.1:3500/
+###
+POST http://127.0.0.1:3500/users
+Content-Type: application/json
+
+{
+    "username": "Nathan",
+    "password": "passw1ord"
+}
+###
+POST http://127.0.0.1:3500/users/login
+Content-Type: application/json
+
+{
+    "name": "Nathan",
+    "password": "password"
+}
