@@ -77,4 +77,8 @@ export async function get_product_count(search = null){
 
 }
 
+export async function find_account(email) {
+    return pool.query(`SELECT * FROM customer WHERE email = '${email}'`)[0]
+}
+
 // console.log(`Customer name: ${customer_data[first_name]} ${customer_data[last_name]}`)
