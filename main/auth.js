@@ -12,6 +12,7 @@ export function authUser(req, res, next){
         req.user = decoded;
     } catch (err) {
         req.user = null;
+        res.clearCookie("token")
     }
 
     next()
@@ -21,5 +22,13 @@ export function requireAuth(req, res, next){
     if (!req.user){
         return res.redirect("/user/login")
     }
+    next()
+}
+
+export function requireNoAuth(req, res, next){
+    if (req.user){
+        return res.redirect("/")
+    }
+
     next()
 }

@@ -1,13 +1,29 @@
-<h1>Login</h1>
-<form action="/user/login" method="POST">
-    <div>
-        <label for="email">Email</label>
-        <input name="email" id="email" type="text">
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input name="password" type="text">
-    </div>
-    <button type="submit">Login</button>
-</form>
-<a href="/user/register">Register</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sharp Object - Login</title>
+        <link rel="stylesheet" href="/css/stylesheet.css">
+    </head>
+    <body id="login-page"> 
+        <div id="login-wrapper">    
+            <h1>Login</h1>
+            <% if (typeof error !== "undefined") { %>
+                <div class="error"><%= error %></div>
+            <% } %> 
+            <form action="/user/login" method="POST">
+                <div>
+                    <label for="email">Email</label>
+                    <input name="email" type="text" required>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input name="password" type="text" required>
+                </div>
+                <button id="login-button" type="submit">Login</button>
+            </form>
+            <a class ="account-link" href="/user/register">Register</a>
+        </div> 
+    </body>
+</html>

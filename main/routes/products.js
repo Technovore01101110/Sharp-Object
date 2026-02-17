@@ -13,7 +13,7 @@ router.get('/', async (req, res) =>{
     const k = req.query.k;
     const limit = 10;
     let offset;
-
+    const user = req.user ?? null
     console.log(k)
 
     offset = (page - 1) * 10;
@@ -54,7 +54,7 @@ router.get('/', async (req, res) =>{
     });
 
     // Return data, page number, and total pages.
-    res.status(202).render(path.join(__dirname, "..", "views", "products.ejs"), { products, page, totalPages, k })
+    res.status(202).render(path.join(__dirname, "..", "views", "products.ejs"), { products, page, totalPages, k, user })
 })
 
 router.get('/:name', async (req, res) =>{

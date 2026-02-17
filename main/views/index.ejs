@@ -15,14 +15,19 @@
             <div id ="nav-wrapper">
                 <button id="menu_button"><img src="/images/symbols/bars.png" alt="-"></button>
                 <nav id ="navbar">
-                    <a href="index">Home</a>
+                    <a href="/">Home</a>
                     <a href="products">Products</a>
                     <a href="contact">Contact Us</a>
+                    <% if(user) { %>
+                        <h3> Hello, <%= user.first_name %></h3>
+                    <% } else { %>
+                        <div id="account-setup-wrapper">
+                            <a class="account-travel" href="/user/login">Login</a>
+                            <a class="account-travel" href="/user/register">Sign Up</a>
+                        </div>
+                    <% } %>
                 </nav>
             </div>
-            <% if(user) { %>
-                <h3> Hello, <%= user.first_name %></h3>
-            <% } %>
         </header>
         <div id="hero">
             <div id="hero_box">

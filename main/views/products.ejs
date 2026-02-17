@@ -18,6 +18,14 @@
                 <a href="/">Home</a>
                 <a href="products">Products</a>
                 <a href="contact">Contact Us</a>
+                <% if(user) { %>
+                    <h3> Hello, <%= user.first_name %></h3>
+                <% } else { %>
+                    <div id="account-setup-wrapper">
+                        <a class="account-travel" href="/user/login">Login</a>
+                        <a class="account-travel" href="/user/register">Sign Up</a>
+                    </div>
+                <% } %>
             </nav>
         </div>
     </header>

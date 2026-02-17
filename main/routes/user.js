@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import {users} from "../server.js"
 import jwt from "jsonwebtoken"
 import { find_account } from "../database.js";
-
+import { requireAuth, requireNoAuth } from "../auth.js";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -13,19 +13,20 @@ const __dirname = path.dirname(__filename);
 
 router.use(express.urlencoded({extended: false}))
 
-router.get("/login", (req, res) =>{
+router.get("/login", requireNoAuth, (req, res) => {
     res.render(path.join(__dirname, "..", "views", "login.ejs"))
 })
 
-router.get("/register", (req, res) =>{
+router.get("/register", requireNoAuth, (req, res) =>{
     res.render(path.join(__dirname, "..", "views", "register.ejs"))
 })
 
-router.get("/profile", (req, res) =>{
-
+router.get("/profile", requireAuth, (req, res) =>{
+    const name = req.user.first_name
+    res.render(path.join(__dirname, "..", "views", "profile.ejs"), {name})
 })
 
-router.post('/register', async (req, res) =>{
+router.post('/register', requireNoAuth, async (req, res) =>{
     try{
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
@@ -47,7 +48,7 @@ router.post('/register', async (req, res) =>{
     console.log(users)
 })
 
-router.post("/login", async (req, res) =>{
+router.post("/login", requireNoAuth, async (req, res) =>{
     const user = users.find(user => req.body.email === user.email)
     console.log(user)
     if (!user || !(await bcrypt.compare(req.body.password, user.password))){
@@ -59,14 +60,16 @@ router.post("/login", async (req, res) =>{
         first_name: user.first_name,
         last_name: user.last_name
     },
-         process.env.ACCESS_SECRET_TOKEN);
+         process.env.ACCESS_SECRET_TOKEN,
+        {expiresIn: "1min"});
 
     res.cookie("token", token, {httpOnly: true});
     res.redirect('/');
 })
 
-router.post("/logout", async (req, res) =>{
-    
+router.get("/logout", requireAuth, async (req, res) =>{
+    res.clearCookie("token")
+    return res.redirect("/")
 })
 
 export default router;
