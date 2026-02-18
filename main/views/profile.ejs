@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharp Object - Profile</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-    <h2>Hi <%= name %></h2>
+    <%- include("./partials/header.ejs") %>
+    <h2>Hi <%= user.first_name, user.last_name %></h2>
+    <%- include("./partials/footer.ejs") %>
 </body>
 </html>

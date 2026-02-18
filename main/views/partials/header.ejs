@@ -1,0 +1,22 @@
+<header>
+    <a href="index" class ="logo_link"><img src="/images/Sharp.png" alt="logo link"></a>
+    <div id ="nav-wrapper">
+        <button id="menu_button"><img src="/images/symbols/bars.png" alt="-"></button>
+        <nav id = "navbar">
+            <a href="/">Home</a>
+            <a href="products">Products</a>
+            <a href="contact">Contact Us</a>
+            <% if(user) { %>
+                <div id="account-wrapper">
+                    <h3> <%= user.first_name %> <%= user.last_name %></h3>
+                    <button id="account-icon" type="button"><img src="/images/symbols/account-icon.png" alt=""></button>
+                </div>
+            <% } else { %>
+                <div id="account-setup-wrapper">
+                    <a class="account-travel" href="/user/login">Login</a>
+                    <a class="account-travel" href="/user/register">Sign Up</a>
+                </div>
+            <% } %>
+        </nav>
+    </div>
+</header>

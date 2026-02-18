@@ -15,11 +15,11 @@
             <form action="/user/login" method="POST">
                 <div>
                     <label for="email">Email</label>
-                    <input name="email" type="text" required>
+                    <input name="email" type="text" autocomplete="email" required>
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input name="password" type="text" required>
+                    <input name="password" type="password" autocomplete="current-password" required>
                 </div>
                 <button id="login-button" type="submit">Login</button>
             </form>

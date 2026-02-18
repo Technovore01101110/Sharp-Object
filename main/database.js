@@ -21,7 +21,6 @@ async function insert(){
 export async function get_table(table) {
     const customer_data = await pool.query(`SELECT * FROM ${table}`)
     const customer_info = customer_data[0]
-    // console.log(`Hello, ${customer_info.first_name} ${customer_info.last_name}`)
 
     return customer_data[0];
 }
@@ -66,7 +65,6 @@ export async function get_product_count(search = null){
         data = await pool.query(`SELECT COUNT(*) AS count FROM product`)
     } else {
         const tokens = search.split(" ").filter(Boolean);
-        console.log(`Tokens: ${tokens}`)
         const likeClauses = tokens.map(() => `name LIKE ?`).join(" OR ");
         const params = tokens.map(t => `%${t}%`);
 
@@ -77,8 +75,27 @@ export async function get_product_count(search = null){
 
 }
 
-export async function find_account(email) {
-    return pool.query(`SELECT * FROM customer WHERE email = '${email}'`)[0]
+export async function find_account(id = null, email = null) {
+    let fetch = `SELECT * FROM customer WHERE`
+
+    if (id){
+        fetch += ` id = '${id}'`
+    } else{
+        fetch += ` email = '${email}'`
+    }
+    
+    const customer = await pool.query(fetch)
+    return customer[0][0]
 }
 
-// console.log(`Customer name: ${customer_data[first_name]} ${customer_data[last_name]}`)
+export async function check_account(email){
+    const [data_res] = await pool.query(`SELECT COUNT(*) AS count FROM customer WHERE email = '${email}'`)
+    const is_account = data_res[0].count
+
+    return is_account > 0;
+}
+
+export function register_account(user){
+    pool.query(`INSERT INTO customer (first_name, last_name, email, password)
+                VALUES ('${user.first_name}', '${user.last_name}', '${user.email}', '${user.password}')`)
+}

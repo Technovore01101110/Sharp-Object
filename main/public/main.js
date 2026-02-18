@@ -20,7 +20,6 @@ const contact_page = document.getElementById("contact_page")
 function toggle_sticky(){
     if (window.pageYOffset >= nav_offset){
         nav.classList.add('sticky')
-        console.log(nav_offset)
         if (hero) {
             hero.classList.add('sticky')
         } else if (banner) {

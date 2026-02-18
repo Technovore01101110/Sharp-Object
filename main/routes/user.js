@@ -4,7 +4,7 @@ import path from "path";
 import bcrypt from "bcrypt";
 import {users} from "../server.js"
 import jwt from "jsonwebtoken"
-import { find_account } from "../database.js";
+import { check_account, find_account, register_account } from "../database.js";
 import { requireAuth, requireNoAuth } from "../auth.js";
 
 const router = express.Router();
@@ -22,14 +22,14 @@ router.get("/register", requireNoAuth, (req, res) =>{
 })
 
 router.get("/profile", requireAuth, (req, res) =>{
-    const name = req.user.first_name
-    res.render(path.join(__dirname, "..", "views", "profile.ejs"), {name})
+    const user = req.user ?? null
+    res.render(path.join(__dirname, "..", "views", "profile.ejs"), {user})
 })
 
 router.post('/register', requireNoAuth, async (req, res) =>{
+    
     try{
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-
 
         const user = {
             first_name: req.body.first_name,
@@ -38,7 +38,12 @@ router.post('/register', requireNoAuth, async (req, res) =>{
             password: hashedPassword,
         }
 
-        users.push(user)
+        const isUser = await check_account(user.email)
+        if (isUser){
+            return res.render('../views/register.ejs', {error: "There is already an account with this email."})
+        }
+
+        register_account(user)
 
         res.redirect('/user/login')
     } catch (error) {
@@ -49,8 +54,7 @@ router.post('/register', requireNoAuth, async (req, res) =>{
 })
 
 router.post("/login", requireNoAuth, async (req, res) =>{
-    const user = users.find(user => req.body.email === user.email)
-    console.log(user)
+    const user = await find_account(null, req.body.email)
     if (!user || !(await bcrypt.compare(req.body.password, user.password))){
         return res.render("../views/login.ejs", {error: "Invalid credentials"})
     }

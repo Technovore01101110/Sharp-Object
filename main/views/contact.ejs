@@ -10,17 +10,7 @@
     </head>
     <body>
         <div class="contact_background">
-            <header>
-                <a href="index" class ="logo_link"><img src="images/Sharp.png" alt="logo link"></a>
-                <div id ="nav-wrapper">
-                    <button id="menu_button"><img src="/images/symbols/bars.png" alt="-"></button>
-                    <nav id = "navbar">
-                        <a href="/">Home</a>
-                        <a href="products">Products</a>
-                        <a href="#">Contact Us</a>
-                    </nav>
-                </div>
-            </header>
+            <%- include("./partials/header.ejs") %>
                 <main id ="contact_page">
                     <h1>If you have any issues, contact us.</h1>
                     <section id="contact_message">
@@ -55,26 +45,7 @@
                         </div>
                     </section>
                 </main>
-                <footer>
-                    <p> Sharp Objects &copy; 2023 - Nathan Sharp</p>
-                    <div class="footer-links">
-                    <p><a href="https://technovore01101110.github.io/WDD130/sharp-objects/site-plan.html">Site Plan</a></p>
-                    <p><a href="products.html">Products</a></p>
-                    <p><a href="contact.html">Contact Us</a></p>
-                    </div>
-
-                    <div class="social">
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <img src="images/facebook.png" alt="fb icon">
-                        </a>
-                        <a href="https://twitter.com/" target="_blank">
-                            <img src="images/twitter.png" alt="twitter icon">
-                        </a>
-                        <a href="https://instagram.com" target="_blank">
-                            <img src="images/instagram.png" alt="instagram icon">
-                        </a>
-                    </div>
-                </footer>
+                <%- include("./partials/footer.ejs") %>
         </div>
     </body>
 </html>

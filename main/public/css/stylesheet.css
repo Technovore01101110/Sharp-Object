@@ -646,7 +646,6 @@ label{
 
 .error{
     text-align: center;
-    width: 30%;
     background-color: rgb(152, 0, 0);
     color: white;
 }
@@ -667,14 +666,15 @@ label{
     position: relative;
     top: 33vh;
     padding: 20px;
+    padding-top: 40px;
     background-color: #706C61;
     width: 500px;
 }
 
-#login-wrapper h1{
+#login-wrapper h1, #register-wrapper h1{
     color: #edae49;
     margin-top: 0;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 #login-wrapper div{
@@ -690,19 +690,44 @@ label{
 
 }
 
-#login-button{
+#login-button, #register-button{
     margin-left: 10px;
     font-size: 20px;
     background-color: #edae49;
     color: #706C61;
     border: none;
+    padding: 10px;
 }
 
 .account-link{
+    display: block;
     color: #3FA7D6;
     margin-top: 10px;
     padding: 10px;
     font-size: 20px;
+}
+
+#register-wrapper{
+    box-shadow: #ceddbe 25px 23px 11px;
+    margin: 0 auto;
+    position: relative;
+    top: 30vh;
+    padding: 20px;
+    background-color: #706C61;
+    width: 400px;
+    min-height: 300px;
+    text-align: left;
+}
+
+#register-wrapper div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#register-wrapper div{
+    padding-left: 0;
 }
 
 /* nav a {
@@ -769,6 +794,10 @@ nav a:hover {
         width: 100px;
     }
     
+    #navbar{
+        min-height: 144px;
+    }
+
     header{
         flex-direction: row;
         align-items: center;
@@ -793,6 +822,23 @@ nav a:hover {
         max-height: 500px;
         flex-direction: row;
         position: relative;
+    }
+
+    #account-wrapper{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    #account-icon{
+        border: none;
+        width: 60px;
+        border-radius: 10px;
+        background-color: #706C61;
+    }
+
+    #account-icon img{
+        width: 40px;
     }
 
     #hero.sticky,

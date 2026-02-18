@@ -37,7 +37,7 @@ app.get("/", async (req, res) =>{
 
 app.get("/contact", (req, res) =>{
     const user = req.user ?? null
-    res.status(202).sendFile(path.join(__dirname, "views", "contact.html"));
+    res.status(202).render(path.join(__dirname, "views", "contact.ejs"), {user});
 })
 
 app.listen(PORT, () => {

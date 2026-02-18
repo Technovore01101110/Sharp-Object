@@ -5,8 +5,7 @@ import {get_featured_products, get_products, get_product_count} from "../databas
 const router = express.Router();
 
 router.get("/products/featured", async (req, res) => {
-    const products = await get_featured_products(5);
-    console.log(products);  
+    const products = await get_featured_products(5); 
     res.status(202).json(products);
 })
 

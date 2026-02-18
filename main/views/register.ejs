@@ -1,21 +1,37 @@
-<h1>Register</h1>
-<form action="/user/register" method="post">
-    <div>
-        <label for="first_name">First Name</label>
-        <input type="text" name="first_name" required>
-    </div>
-    <div>
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" required>
-    </div>
-    <div>
-        <label for="email">Email</label>
-        <input name="email" id="email" type="text" required>
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input name="password" type="text" required>
-    </div>
-    <button type="submit">Register</button>
-</form>
-<a href="/user/login">Login</a>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/css/stylesheet.css">
+    </head>
+    <body>
+        <div id="register-wrapper">
+            <h1>Register</h1>
+            <% if (typeof error !== "undefined") { %>
+                            <div class="error"><%= error %></div>
+            <% } %> 
+            <form action="/user/register" method="post">
+                <div>
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" required>
+                </div>
+                <div>
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" required>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input name="email" type="text" autocomplete="email" required>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input name="password" type="password" autocomplete="new-password" required>
+                </div>
+                <button id="register-button" type="submit">Register</button>
+            </form>
+            <a class="account-link" href="/user/login">Login</a>
+        </div>
+    </body>
+</html>
