@@ -75,17 +75,17 @@ export async function get_product_count(search = null){
 
 }
 
-export async function find_account(id = null, email = null) {
+export async function get_account(id = null, email = null) {
     let fetch = `SELECT * FROM customer WHERE`
 
     if (id){
-        fetch += ` id = '${id}'`
+        fetch += ` customer_id = ${id}`
     } else{
         fetch += ` email = '${email}'`
     }
     
-    const customer = await pool.query(fetch)
-    return customer[0][0]
+    const [customer] = await pool.query(fetch)
+    return customer[0]
 }
 
 export async function check_account(email){

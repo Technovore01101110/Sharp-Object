@@ -8,7 +8,22 @@
 </head>
 <body>
     <%- include("./partials/header.ejs") %>
-    <h2>Hi <%= user.first_name, user.last_name %></h2>
+    <div id="profile-header">
+        <h2> Welcome back, <%= user.first_name%></h2>
+        <a href="/user/logout">Log out -></a>
+    </div>
+    <div id="profile-page">
+        <aside id="profile-bar">
+            <a href="">General</a>
+            <a href="">Order History</a>
+        </aside>
+        <main>
+            <h3>Full Name: <%= user.first_name%> <%= user.last_name %> </h3>
+            <h3>Email: <%= user.email %></h3>
+            <button type="button">Edit Profile</button>
+            <button type="button">Delete Account</button>
+        </main>
+    </div>
     <%- include("./partials/footer.ejs") %>
 </body>
 </html>

@@ -4,7 +4,7 @@ import path from "path";
 import bcrypt from "bcrypt";
 import {users} from "../server.js"
 import jwt from "jsonwebtoken"
-import { check_account, find_account, register_account } from "../database.js";
+import { check_account, get_account, register_account } from "../database.js";
 import { requireAuth, requireNoAuth } from "../auth.js";
 
 const router = express.Router();
@@ -23,6 +23,7 @@ router.get("/register", requireNoAuth, (req, res) =>{
 
 router.get("/profile", requireAuth, (req, res) =>{
     const user = req.user ?? null
+    console.log(user)
     res.render(path.join(__dirname, "..", "views", "profile.ejs"), {user})
 })
 
@@ -54,7 +55,7 @@ router.post('/register', requireNoAuth, async (req, res) =>{
 })
 
 router.post("/login", requireNoAuth, async (req, res) =>{
-    const user = await find_account(null, req.body.email)
+    const user = await get_account(null, req.body.email)
     if (!user || !(await bcrypt.compare(req.body.password, user.password))){
         return res.render("../views/login.ejs", {error: "Invalid credentials"})
     }
@@ -65,7 +66,7 @@ router.post("/login", requireNoAuth, async (req, res) =>{
         last_name: user.last_name
     },
          process.env.ACCESS_SECRET_TOKEN,
-        {expiresIn: "1min"});
+        {expiresIn: "5 min"});
 
     res.cookie("token", token, {httpOnly: true});
     res.redirect('/');

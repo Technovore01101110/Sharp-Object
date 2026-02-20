@@ -143,6 +143,10 @@ nav a:hover {
     border-bottom: 3px solid #706C61;
 }
 
+#account-icon a{
+    padding: 0;
+}
+
 #hero {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
@@ -703,6 +707,7 @@ label{
     display: block;
     color: #3FA7D6;
     margin-top: 10px;
+    width: min-content;
     padding: 10px;
     font-size: 20px;
 }
@@ -728,6 +733,33 @@ label{
 
 #register-wrapper div{
     padding-left: 0;
+}
+
+#profile-header{
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+#profile-page{
+    display: flex;
+    gap: 60px;
+}
+
+#profile-bar{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    background-color: #706C61;
+    padding: 10px;
+    gap: 15px;
+}
+
+#profile-bar a{
+    font-size: 25px;
+    color: #ceddbe;
 }
 
 /* nav a {

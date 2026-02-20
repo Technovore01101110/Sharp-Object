@@ -1,5 +1,5 @@
 <header>
-    <a href="index" class ="logo_link"><img src="/images/Sharp.png" alt="logo link"></a>
+    <a href="/" class ="logo_link"><img src="/images/Sharp.png" alt="logo link"></a>
     <div id ="nav-wrapper">
         <button id="menu_button"><img src="/images/symbols/bars.png" alt="-"></button>
         <nav id = "navbar">
@@ -9,7 +9,7 @@
             <% if(user) { %>
                 <div id="account-wrapper">
                     <h3> <%= user.first_name %> <%= user.last_name %></h3>
-                    <button id="account-icon" type="button"><img src="/images/symbols/account-icon.png" alt=""></button>
+                    <button id="account-icon" type="button"><a href="/user/profile"><img src="/images/symbols/account-icon.png" alt=""></a></button>
                 </div>
             <% } else { %>
                 <div id="account-setup-wrapper">

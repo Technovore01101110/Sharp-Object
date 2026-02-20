@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken"
+import { get_account } from "./database.js";
 
-export function authUser(req, res, next){
+export async function authUser(req, res, next){
     const token = req.cookies.token ?? null;
     if (!token){
         req.user = null
@@ -9,8 +10,10 @@ export function authUser(req, res, next){
 
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_SECRET_TOKEN);
-        req.user = decoded;
+        req.user = await get_account(decoded.id);
+        
     } catch (err) {
+        console.log(err)
         req.user = null;
         res.clearCookie("token")
     }
