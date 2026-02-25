@@ -4,8 +4,9 @@ import path from "path";
 import bcrypt from "bcrypt";
 import {users} from "../server.js"
 import jwt from "jsonwebtoken"
-import { check_account, get_account, register_account } from "../database.js";
+import { check_account, get_account, register_account, findByIdAndUpdate } from "../database.js";
 import { requireAuth, requireNoAuth } from "../auth.js";
+import { uploadProfileImage } from "../my_multer.js";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -77,4 +78,19 @@ router.get("/logout", requireAuth, async (req, res) =>{
     return res.redirect("/")
 })
 
+router.post("/profile/photo", requireAuth,
+    uploadProfileImage.single("profile_image"), 
+    async (req, res) => {
+        try {
+            const imagePath = `/images/profile_icons/${req.file.filename}`;
+            await findByIdAndUpdate(req.user.id, {
+                profile_image: imagePath
+            })
+            
+            res.redirect("/user/profile");
+        } catch(err){
+            console.log(err)
+            res.status(500).send(err.message)
+        }
+})
 export default router;

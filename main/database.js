@@ -1,5 +1,7 @@
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
+import { error } from 'console'
+import { response } from 'express'
 dotenv.config()
 
 const pool = mysql.createPool({
@@ -98,4 +100,18 @@ export async function check_account(email){
 export function register_account(user){
     pool.query(`INSERT INTO customer (first_name, last_name, email, password)
                 VALUES ('${user.first_name}', '${user.last_name}', '${user.email}', '${user.password}')`)
+}
+
+export function findByIdAndUpdate (id, updateData){
+    let update_statement = `UPDATE customer`;
+
+    if (updateData.profile_image){
+        update_statement += ` SET icon_url = '${updateData.profile_image}'`
+    } else{
+        return new error("Not an option to upload - database.js")
+    }
+
+    const response = pool.query(update_statement)
+    console.log(`Database.js: ${response}`)
+    return
 }

@@ -22,6 +22,10 @@
             <h3>Email: <%= user.email %></h3>
             <button type="button">Edit Profile</button>
             <button type="button">Delete Account</button>
+            <form action="/user/profile/photo" method="post" enctype="multipart/form-data">
+                <input type="file" name="profile_image" accept="image/*" required>
+                <button>Update Profile</button>
+            </form>
         </main>
     </div>
     <%- include("./partials/footer.ejs") %>

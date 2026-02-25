@@ -9,7 +9,12 @@
             <% if(user) { %>
                 <div id="account-wrapper">
                     <h3> <%= user.first_name %> <%= user.last_name %></h3>
-                    <button id="account-icon" type="button"><a href="/user/profile"><img src="/images/symbols/account-icon.png" alt=""></a></button>
+                    <% if(user.icon_url != null){ %>
+                        <a href="/user/profile"><img src="<%= user.icon_url %>" alt="user_icon"></button>
+                    <% } else { %>
+                        <button id="account-icon" type="button"><a href="/user/profile"><img src="/images/symbols/account-icon.png" alt=""></a></button>
+                    <% } %>
+
                 </div>
             <% } else { %>
                 <div id="account-setup-wrapper">
