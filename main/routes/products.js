@@ -2,6 +2,7 @@ import express, { Router }  from "express";
 import {fileURLToPath} from "url";
 import path from "path";
 import { json } from "stream/consumers";
+import { get_product_info } from "../database.js";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -59,11 +60,12 @@ router.get('/', async (req, res) =>{
 
 router.get('/:name', async (req, res) =>{
     const name = req.params.name
-
+    const product = await get_product_info(name)
+    const user = req.user ?? null
     if (name == undefined){
         res.status(400).send("Error")
     } else{
-        res.status(202).render(path.join(__dirname, "..", "views", "product.ejs"), {name})
+        res.status(202).render(path.join(__dirname, "..", "views", "product.ejs"), {product, user})
     }
 })
 

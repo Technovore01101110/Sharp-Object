@@ -102,6 +102,15 @@ export function register_account(user){
                 VALUES ('${user.first_name}', '${user.last_name}', '${user.email}', '${user.password}')`)
 }
 
+export async function get_product_info(name){
+    const [results] = await pool.query(`SELECT name, rating, print_source, cost, CASE WHEN amount = 0 THEN "Out"
+                                   WHEN amount <= 100 THEN CONCAT(amount, " left")
+                                   ELSE "High" END AS stock 
+                                   FROM product
+                                   WHERE name = '${name}'`)
+    return results[0]
+}
+
 export function findByIdAndUpdate (id, updateData){
     let update_statement = `UPDATE customer`;
 
@@ -111,7 +120,29 @@ export function findByIdAndUpdate (id, updateData){
         return new error("Not an option to upload - database.js")
     }
 
+    update_statement += ` WHERE customer_id = ${id}`
+
     const response = pool.query(update_statement)
     console.log(`Database.js: ${response}`)
     return
+}
+
+export function is_current_order(customer_id){
+    const [results] = pool.query(`SELECT COUNT(*) AS is_order FROM \`order\` WHERE customer_id = ${customer_id} AND finish_date is null`)
+    const is_order = results['is_order']
+
+    return is_order
+}
+
+export function create_new_order(customer_id){
+    pool.query(`INSERT INTO \`order\` (customer_id, order_date) VALUES (${customer_id}, CURDATE())`)
+}
+
+export function add_to_cart(product_id, amount, customer_id){
+    if (is_current_order(customer_id)){
+        create_new_order(customer_id)
+    }
+    const [cart_id] = get_cart_id(customer_id);
+
+    pool.query(`INSERT INTO product_order (product_id, purchase_amount, order_id) VALUES (${product_id}, ${amount}, ${cart_id})`)
 }

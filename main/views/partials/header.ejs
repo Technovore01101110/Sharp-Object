@@ -4,15 +4,15 @@
         <button id="menu_button"><img src="/images/symbols/bars.png" alt="-"></button>
         <nav id = "navbar">
             <a href="/">Home</a>
-            <a href="products">Products</a>
-            <a href="contact">Contact Us</a>
+            <a href="/products">Products</a>
+            <a href="/contact">Contact Us</a>
             <% if(user) { %>
                 <div id="account-wrapper">
                     <h3> <%= user.first_name %> <%= user.last_name %></h3>
                     <% if(user.icon_url != null){ %>
-                        <a href="/user/profile"><img src="<%= user.icon_url %>" alt="user_icon"></button>
+                        <a id="account-icon" href="/user/profile/general"><img src="<%= user.icon_url %>" alt="user_icon"></a>
                     <% } else { %>
-                        <button id="account-icon" type="button"><a href="/user/profile"><img src="/images/symbols/account-icon.png" alt=""></a></button>
+                        <a id="account-icon" style="background-color: #706C61;" href="/user/profile/general"><img src="/images/symbols/account-icon.png" alt=""></a>
                     <% } %>
 
                 </div>

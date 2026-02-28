@@ -22,10 +22,11 @@ router.get("/register", requireNoAuth, (req, res) =>{
     res.render(path.join(__dirname, "..", "views", "register.ejs"))
 })
 
-router.get("/profile", requireAuth, (req, res) =>{
+router.get("/profile/:section", requireAuth, (req, res) =>{
+    const section = req.params.section || "general"
     const user = req.user ?? null
     console.log(user)
-    res.render(path.join(__dirname, "..", "views", "profile.ejs"), {user})
+    res.render(path.join(__dirname, "..", "views", "profile.ejs"), {user, section})
 })
 
 router.post('/register', requireNoAuth, async (req, res) =>{
@@ -67,7 +68,7 @@ router.post("/login", requireNoAuth, async (req, res) =>{
         last_name: user.last_name
     },
          process.env.ACCESS_SECRET_TOKEN,
-        {expiresIn: "5 min"});
+        {expiresIn: "10 min"});
 
     res.cookie("token", token, {httpOnly: true});
     res.redirect('/');
@@ -83,7 +84,7 @@ router.post("/profile/photo", requireAuth,
     async (req, res) => {
         try {
             const imagePath = `/images/profile_icons/${req.file.filename}`;
-            await findByIdAndUpdate(req.user.id, {
+            await findByIdAndUpdate(req.user.customer_id, {
                 profile_image: imagePath
             })
             

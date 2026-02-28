@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharp Object - Profile</title>
     <link rel="stylesheet" href="/css/stylesheet.css">
+    <script src="/profile.js" defer></script>
 </head>
 <body>
     <%- include("./partials/header.ejs") %>
@@ -14,20 +15,44 @@
     </div>
     <div id="profile-page">
         <aside id="profile-bar">
-            <a href="">General</a>
-            <a href="">Order History</a>
+            <a href="general">General</a>
+            <a href="cart">Cart</a>
+            <a href="orders">Order History</a>
         </aside>
         <main>
-            <h3>Full Name: <%= user.first_name%> <%= user.last_name %> </h3>
-            <h3>Email: <%= user.email %></h3>
-            <button type="button">Edit Profile</button>
-            <button type="button">Delete Account</button>
-            <form action="/user/profile/photo" method="post" enctype="multipart/form-data">
-                <input type="file" name="profile_image" accept="image/*" required>
-                <button>Update Profile</button>
-            </form>
+            <% if (section === "general") { %>
+                <h3>Full Name: <%= user.first_name%> <%= user.last_name %> </h3>
+                <h3>Email: <%= user.email %></h3>
+                <button id="edit_profile_button" type="button">Edit Profile</button>
+                <button type="button">Delete Account</button>
+                <form action="/user/profile/photo" method="post" enctype="multipart/form-data">
+                    <input type="file" name="profile_image" accept="image/*" required>
+                    <button>Update Icon</button>
+                </form>
+            <% } else if(section === "cart") { %>
+                <h3>Your Cart</h3>
+            <% } else if (section === "orders") { %>
+                <h3>Order History</h3>
+            <% } %>
         </main>
     </div>
     <%- include("./partials/footer.ejs") %>
+    <div id="edit-board" class="board hidden">
+        <div class="edit-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Edit Profile</h2>
+
+            <form action="/user/profile/update" method="post">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" value="<%= user.first_name %>"> 
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" value="<%= user.last_name %>">
+                <label for="password">Password</label>
+                <input type="password" name="password" autocomplete="new-password">
+                <button type="button">Cancel</button>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
